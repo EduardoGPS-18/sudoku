@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.html.erb": "html",
+    "*.hbs": "html",
+    "stdlib.h": "c",
+    "tabuleiro.h": "c",
+    "string.h": "c",
+    "jogo.h": "c",
+    "auxiliares.h": "c"
+  }
+}
