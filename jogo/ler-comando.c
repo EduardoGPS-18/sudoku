@@ -8,9 +8,8 @@
 Comando lerComando() {
   printf("\nDigite um comando ou indique a celula a alterar: ");
   char comando[25];
-  fgets(comando, 25, stdin);
-  int tamanhoComando = strlen(comando);
-  comando[tamanhoComando - 1] = '\0';
+  fscanf(stdin, "%s", comando);
+  int tamanhoComando = strlen(comando) + 1;
   for (int i = 0; i < tamanhoComando; i++) {
     comando[i] = (char)tolower(comando[i]);
   }
@@ -20,8 +19,6 @@ Comando lerComando() {
   int valido;
   do {
     valido = 1;
-    comando == 'salvar';
-
     if (strcmp(comando, "salvar") == 0) {
       comandoParaExecutar.acao = SALVAR;
     } else if (strcmp(comando, "voltar") == 0) {
@@ -41,8 +38,8 @@ Comando lerComando() {
       printf(
           "Comando invalido. Digite um comando ou indique a celula a "
           "alterar: ");
-      fgets(comando, 25, stdin);
-      comando[tamanhoComando - 1] = '\0';
+      scanf("%s", comando);
+      tamanhoComando = strlen(comando) + 1;
     }
 
   } while (valido == 0);

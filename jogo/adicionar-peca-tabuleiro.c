@@ -4,62 +4,38 @@
 
 #include "./jogo.h"
 
-int verificaMesmoNumeroNaMesmaRegiao(int** tabuleiro, int regiao, int numero) {
-  int regiaoComecoX = floor(regiao / 3) * 3;
-  int regiaoComecoY = (regiao % 3) * 3;
-
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      if (tabuleiro[regiaoComecoX + i][regiaoComecoY + j] == numero) {
-        return 1;
-      }
-    }
-  }
-  return 0;
-}
-
-int verificaMesmoNumeroNaMesmaLinha(int** tabuleiro, int linha, int numero) {
-  for (int i = 0; i < 9; i++) {
-    if (tabuleiro[linha][i] == numero) {
-      return 1;
-    }
-  }
-  return 0;
-}
-
-int verificaMesmoNumeroNaMesmaColuna(int** tabuleiro, int coluna, int numero) {
-  for (int i = 0; i < 9; i++) {
-    if (tabuleiro[i][coluna] == numero) {
-      return 1;
-    }
-  }
-  return 0;
-}
-
 int adicionarPecaTabuleiro(int** tabuleiro, Comando comando) {
+  int valor = comando.valor;
+
   int regiao = comando.regiao - 1;
   int linha = comando.linha - 1;
   int coluna = comando.coluna - 1;
-  int valor = comando.valor;
+
   int regiaoComecoX = floor(regiao / 3) * 3;
   int regiaoComecoY = (regiao % 3) * 3;
 
-  int contemMesmoNumeroNaMesmaRegiao =
-      verificaMesmoNumeroNaMesmaRegiao(tabuleiro, regiao, valor);
-  int contemMesmoNumeroNaMesmaLinha =
-      verificaMesmoNumeroNaMesmaLinha(tabuleiro, linha, valor);
-  int contemMesmoNumeroNaMesmaColuna =
-      verificaMesmoNumeroNaMesmaColuna(tabuleiro, coluna, valor);
+  int linhaEmRelacaoAoTabuleiro = (((regiao - 1) % 3) * 3) + linha;
+  int colunaEmRelacaoAoTabuleiro = ((floor(regiao / 3)) * 3) + coluna;
+
+  int nmrMesmaRegiao = numeroMesmaRegiao(tabuleiro, regiao, valor);
+  int nmrMesmaLinha = numeroMesmaLinha(tabuleiro, linha, valor);
+  int nmrMesmaColuna = numeroMesmaColuna(tabuleiro, coluna, valor);
+
   int jaContemOValorNaPosicao =
       tabuleiro[regiaoComecoX + linha][regiaoComecoY + coluna] == valor;
 
   if (jaContemOValorNaPosicao) {
-    return -1;
-  } else if (contemMesmoNumeroNaMesmaRegiao || contemMesmoNumeroNaMesmaLinha ||
-             contemMesmoNumeroNaMesmaColuna) {
-    return 1;
+    printf("Erro! A celula %d, %d da regiao %d já possui o valor %d\n",
+           comando.linha, comando.coluna, comando.regiao,
+           tabuleiro[regiaoComecoX + linha][regiaoComecoY + coluna]);
+  } else if (nmrMesmaLinha) {
+    printf("Erro! A linha %d já possui o valor %d\n", comando.linha, valor);
+  } else if (nmrMesmaRegiao) {
+    printf("Erro! A regiao %d já possui o valor %d\n", comando.regiao, valor);
+  } else if (nmrMesmaColuna == 1) {
+    printf("Erro! A coluna %d já possui o valor %d\n", comando.coluna, valor);
+    ;
   } else {
     tabuleiro[regiaoComecoX + linha][regiaoComecoY + coluna] = comando.valor;
-    return 0;
   }
 }

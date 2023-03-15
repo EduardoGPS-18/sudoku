@@ -17,8 +17,8 @@ void exibirComando(Comando comando);
 int adicionarPecaTabuleiro(int** tabuleiro, Comando comando);
 int executandoJogo(int** tabuleiro);
 
-int verificaMesmoNumeroNaMesmaColuna(int** tabuleiro, int coluna, int numero);
-int verificaMesmoNumeroNaMesmaLinha(int** tabuleiro, int linha, int numero);
-int verificaMesmoNumeroNaMesmaRegiao(int** tabuleiro, int regiao, int numero);
+int numeroMesmaColuna(int** tabuleiro, int coluna, int numero);
+int numeroMesmaLinha(int** tabuleiro, int linha, int numero);
+int numeroMesmaRegiao(int** tabuleiro, int regiao, int numero);
 
 #endif

@@ -6,6 +6,8 @@
     "tabuleiro.h": "c",
     "string.h": "c",
     "jogo.h": "c",
-    "auxiliares.h": "c"
+    "auxiliares.h": "c",
+    "arquivos.h": "c",
+    "funcoes-jogo.h": "c"
   }
 }

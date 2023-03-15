@@ -1,6 +1,8 @@
 
 #include <stdio.h>
 
+#include "../arquivos/arquivos.h"
+#include "../auxiliares/auxiliares.h"
 #include "jogo.h"
 
 enum Resultado { SUCESSO = 0, FALHA = 1, FALHA_NUMERO_EXISTE_NA_POSICAO = -1 };
@@ -10,9 +12,12 @@ int executandoJogo(int** tabuleiro) {
     Comando c = lerComando();
     switch (c.acao) {
       case SALVAR:
+        char nomeArquivo[255];
+        lerNomeArquivo(nomeArquivo);
+        salvarMatriz(tabuleiro, nomeArquivo);
         break;
       case VOLTAR_MENU:
-        return 1;
+        return -1;
       case ADICIONAR_NUMERO:
         int resultado = adicionarPecaTabuleiro(tabuleiro, c);
         if (resultado == FALHA) {

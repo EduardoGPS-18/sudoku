@@ -3,14 +3,14 @@
 #include "menu.h"
 
 int pegarOpcao() {
-  int opcao;
+  char opcao[10];
   do {
-    scanf("%d", &opcao);
-    if (opcao < 0 || opcao > 3) {
+    scanf("%s", opcao);
+    if (opcao[0] < '0' || opcao[0] > '3') {
       printf("Opção inválida. Tente novamente.\n");
       imprimirMenu();
     }
-  } while (opcao < 0 || opcao > 3);
+  } while (opcao[0] < '0' || opcao[0] > '3');
 
-  return opcao;
+  return (int)opcao[0] - (int)'0';
 }

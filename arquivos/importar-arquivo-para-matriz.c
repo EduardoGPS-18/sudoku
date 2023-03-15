@@ -5,9 +5,9 @@
 #include "./arquivos.h"
 
 int importarArquivoParaMatriz(int **matriz, char fileName[255]) {
-  char caminhoCompleto[255] = "../jogos-salvos/";
+  char caminhoCompleto[255] = "./";
   strcat(caminhoCompleto, fileName);
-  FILE *file = fopen(caminhoCompleto, "a+");
+  FILE *file = fopen(caminhoCompleto, "r");
 
   if (file == NULL) {
     printf("Erro ao abrir o arquivo %s\n", fileName);
